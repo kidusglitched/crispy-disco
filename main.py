@@ -12,7 +12,7 @@ import time
 import fitz  # pymupdf
 from PIL import Image, ImageOps, ImageFilter
 from telegram import Update
-from telegram.ext import Application, MessageHandler, CommandHandler, filters
+from telegram.ext import Application, MessageHandler, CommandHandler, filters, ContextTypes
 
 # --- CONFIG ---
 TEMPLATE = "template.png"
