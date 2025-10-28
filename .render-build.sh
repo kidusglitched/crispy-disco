@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
-set -e
-python -m pip install --upgrade pip setuptools wheel
-python -m pip install --prefer-binary -r requirements.txt
+# Clean and rebuild environment completely to remove old Updater code
+echo "🧹 Cleaning old virtual environment..."
+rm -rf .venv
+rm -rf ~/.cache/pip
+rm -rf /opt/render/.cache/pip
+rm -rf /opt/render/project/src/.venv/lib/python3.13/site-packages/telegram*
+
+echo "📦 Installing fresh dependencies..."
+pip install --upgrade pip
+pip install --no-cache-dir -r requirements.txt
