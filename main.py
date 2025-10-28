@@ -222,17 +222,22 @@ def start_keepalive_thread():
     t.start()
     logger.info("Started keepalive Flask thread on port %s", KEEPALIVE_PORT)
 
+import asyncio
+from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
+
+# your handlers here
+# e.g.
+# async def handle_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
+#     ...
+
 async def main():
-    if KEEPALIVE == "1":
-        start_keepalive_thread()
     app = Application.builder().token(BOT_TOKEN).build()
+
+    app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.Document.PDF, handle_pdf))
-    app.add_handler(CommandHandler("done", done_command))
-    logger.info("🤖 Bot started. Send up to 5 PDFs, then type /done.")
+
+    print("✅ Bot is running...")
     await app.run_polling()
 
 if __name__ == "__main__":
-    try:
-        asyncio.run(main())
-    except KeyboardInterrupt:
-        logger.info("Shutting down.")
+    asyncio.run(main())
