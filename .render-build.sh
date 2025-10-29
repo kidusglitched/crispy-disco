@@ -8,4 +8,4 @@ rm -rf /opt/render/project/src/.venv/lib/python3.13/site-packages/telegram*
 
 echo "📦 Installing fresh dependencies..."
 pip install --upgrade pip
-pip install --no-cache-dir -r requirements.txt
+pip install --break-system-packages -r requirements.txt
